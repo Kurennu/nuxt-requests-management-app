@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import NavigationMenu from '~/components/NavigationMenu.vue'
 </script>
 
 <template>
   <div :class="$style.layout">
+    <NavigationMenu :class="$style.aside" />
     <main :class="$style.main">
       <slot />
     </main>
@@ -25,4 +27,7 @@
     padding-block: 24px;
   }
 
+  .aside {
+    flex-shrink: 0;
+  }
 </style>
