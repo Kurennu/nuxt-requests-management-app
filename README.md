@@ -1,0 +1,1 @@
+# nuxt-requests-management-app
