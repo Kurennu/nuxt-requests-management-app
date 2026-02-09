@@ -1,5 +1,5 @@
 export default defineEventHandler(async (event) => {
-    // await new Promise(resolve => setTimeout(resolve, 2000))
+    await new Promise(resolve => setTimeout(resolve, 2000))
 
     const query = getQuery(event)
     const requestId = query.id as string
