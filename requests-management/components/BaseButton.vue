@@ -45,10 +45,9 @@
     font-size: 14px;
     line-height: 130%;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all var(--transition-duration) ease;
     border: none;
     white-space: nowrap;
-    transition-duration: var(--transition-duration);
   }
 
   .primary {
@@ -59,8 +58,10 @@
     line-height: 130%;
     transition: opacity var(--transition-duration) ease-in;
 
-    &:hover:not(.disabled) {
-      background: var(--color-bg-brand);
+    @include hover{
+      &:not([disabled]) {
+        background: var(--color-bg-brand);
+      }
     }
 
     &[disabled] {
@@ -79,8 +80,10 @@
     font-size: 14px;
     line-height: 143%;
 
-    &:hover:not([disabled]) {
-      background: var(--color-bg-primary);
+    @include hover{
+      &:not([disabled]) {
+        background: var(--color-bg-primary);
+      }
     }
   }
 

@@ -43,7 +43,7 @@
   background-color: var(--color-bg-secondary);
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
   border-radius: 16px;
-  width: 280px;
+  width: var(--sidebar-width);
   height: 100%;
   transition: width 0.3s ease;
   overflow: hidden;
@@ -63,7 +63,7 @@
     background-color: var(--color-bg-primary);
     transition: background-color var(--transition-duration) ease;
 
-    &:hover{
+    @include hover{
       box-shadow: inset 0 0 0 50px rgba(0, 0, 0, 0.04);
     }
 
@@ -122,7 +122,7 @@
   }
 
   &.collapsed {
-    width: 68px;
+    width: var(--sidebar-width-collapsed);
     justify-content: center;
 
     .item {

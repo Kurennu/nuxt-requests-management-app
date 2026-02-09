@@ -1,10 +1,4 @@
 <script setup lang="ts">
-  import BaseTable from '~/components/BaseTable.vue'
-  import BaseTableRow from '~/components/BaseTableRow.vue'
-  import BaseTableCell from '~/components/BaseTableCell.vue'
-  import BaseInput from '~/components/BaseInput.vue'
-  import BaseSelect from '~/components/BaseSelect.vue'
-  import BaseButton from '~/components/BaseButton.vue'
   import type { Product } from '~/types'
 
   const props = defineProps<{
@@ -33,40 +27,46 @@
   }, { immediate: true })
 
   const validators = {
-    isEmpty: (value: any): boolean => {
+    isEmpty: (value: string | number | undefined): boolean => {
       return value === undefined || value === null || value === ''
     },
 
-    isValidNumber: (value: any): boolean => {
+    isValidNumber: (value: string | number | undefined): boolean => {
       if (validators.isEmpty(value)) return false
       return /^\d+(\.\d+)?$/.test(String(value))
     },
 
-    isInList: (value: any, list: string[]): boolean => {
-      return list.includes(value)
+    isInList: (value: string | undefined, list: string[]): boolean => {
+      return !!value && list.includes(value)
     }
   }
 
   const validateField = (
-      value: any,
+      value: string | number | undefined,
       fieldName: 'quantity' | 'price' | 'color'
   ): string | undefined => {
     switch (fieldName) {
       case 'quantity':
       case 'price':
-        if (validators.isEmpty(value) && value !== 0) {
+
+        if (validators.isEmpty(value)) {
           return 'Поле не может быть пустым'
         }
+
         if (!validators.isValidNumber(value)) {
           return 'Только цифры и точка'
+        }
+
+        const numValue = Number(value)
+        if (numValue <= 0) {
+          return fieldName === 'price'
+              ? 'Цена должна быть больше 0'
+              : 'Количество должно быть больше 0'
         }
         break
 
       case 'color':
-        if (validators.isEmpty(value)) {
-          return 'Выберите цвет'
-        }
-        if (!validators.isInList(value, allowedColors)) {
+        if (!validators.isInList(value as string, allowedColors)) {
           return 'Выберите цвет из списка'
         }
         break
@@ -111,6 +111,7 @@
   }
 </script>
 
+
 <template>
   <div :class="$style.wrapper">
     <BaseButton
@@ -119,6 +120,7 @@
         size="medium"
         @click="handleSave"
         :class="$style.saveButton"
+        aria-label="Сохранить таблицу продуктов"
     />
 
     <BaseTable

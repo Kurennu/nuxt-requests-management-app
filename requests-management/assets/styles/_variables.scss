@@ -7,6 +7,7 @@
   --color-text-contrast: #fff;
   --color-text-disabled: #afafaf;
   --color-text-error: #ea3025;
+  --color-text-info: #449AFF;
 
   --color-bg-primary: #f7f7f7;
   --color-bg-secondary: #fff;
@@ -15,6 +16,7 @@
   --color-bg-error-light: #FFEFEF;
   --color-bg-brand: #FFA319;
   --color-bg-disabled: #f2f2f2;
+  --color-bg-info-light: #E9F6FC;
 
   --color-stroke-border: #d9d9d9;
   --color-stroke-divider-light: #eae8e8;
@@ -33,6 +35,9 @@
 
   --container-width: 1880px;
   --container-padding-x: 20px;
+
+  --sidebar-width: 280px;
+  --sidebar-width-collapsed: 68px;
 
   --transition-duration: 0.2s;
 }

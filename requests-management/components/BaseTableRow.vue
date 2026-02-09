@@ -36,7 +36,7 @@
     cursor: pointer;
     transition: background-color var(--transition-duration) ease;
 
-    &:hover {
+    @include hover{
       background-color: var(--color-bg-date-range);
     }
   }

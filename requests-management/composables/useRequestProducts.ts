@@ -9,7 +9,6 @@ export const useRequestProducts = (requestId: number) => {
 
     const loadProducts = async () => {
         const cached = getItem<RequestLocalData>(storageKey)
-
         if (cached?.products) {
             products.value = cached.products
             return
@@ -20,7 +19,8 @@ export const useRequestProducts = (requestId: number) => {
             products.value = await $fetch<Product[]>('/api/products', {
                 query: { id: requestId }
             })
-        } catch (error) {
+        } catch (e) {
+            console.error(e)
         } finally {
             loading.value = false
         }

@@ -2,8 +2,8 @@ export interface Product {
     id: number
     name: string
     price: number
-    quantity?: number
-    color?: string
+    quantity: number
+    color: string
 }
 
 export interface Request {

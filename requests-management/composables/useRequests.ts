@@ -5,13 +5,16 @@ export const useRequests = () => {
 
     const requests = ref<Request[]>([])
     const loading = ref(false)
-    const error = ref<string | null>(null)
 
     const loadRequests = async () => {
         loading.value = true
         error.value = null
         try {
             requests.value = await $fetch<Request[]>('/api/table-data')
+            requests.value = requests.value.map(request => ({
+                ...request,
+                status: hasLocalData(request.id) ? 'Готова к отправке' : 'Активна'
+            }))
         } catch (e) {
             console.error(e)
         } finally {
@@ -55,7 +58,6 @@ export const useRequests = () => {
     return {
         requests,
         loading,
-        error,
         loadRequests,
         hasLocalData,
         submitRequest

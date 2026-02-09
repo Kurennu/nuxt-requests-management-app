@@ -4,6 +4,6 @@ export default defineEventHandler(async (event) => {
     console.log(body)
 
     return {
-        success: true
+        success: true as const
     }
 })

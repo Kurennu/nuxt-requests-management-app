@@ -84,7 +84,7 @@
     color: var(--color-text-primary);
     line-height: 143%;
 
-    &:hover{
+    @include hover{
       border-color: var(--color-stroke-border-hover);
     }
 

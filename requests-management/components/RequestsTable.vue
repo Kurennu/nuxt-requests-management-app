@@ -1,9 +1,4 @@
 <script setup lang="ts">
-  import BaseTable from '~/components/BaseTable.vue'
-  import BaseTableRow from '~/components/BaseTableRow.vue'
-  import BaseTableCell from '~/components/BaseTableCell.vue'
-  import BaseButton from '~/components/BaseButton.vue'
-
   const router = useRouter()
   const { requests, loading, loadRequests, hasLocalData, submitRequest } = useRequests()
 
@@ -28,10 +23,15 @@
     const handleRowClick = (requestId: number) => {
       router.push(`/edit?id=${requestId}`)
     }
+
 </script>
 
 <template>
   <p v-if="loading">Загрузка...</p>
+
+  <div v-else-if="requests.length === 0" :class="$style.empty">
+    <p>Заявок пока нет</p>
+  </div>
 
   <BaseTable
       v-else
@@ -47,7 +47,14 @@
       <BaseTableCell>{{ request.number }}</BaseTableCell>
 
       <BaseTableCell>
-        <span :class="$style.status">
+        <span
+            :class="[
+              $style.status,
+              request.status === 'Готова к отправке'
+                ? $style.statusReady
+                : $style.statusActive
+            ]"
+        >
           {{ request.status }}
         </span>
       </BaseTableCell>
@@ -64,6 +71,7 @@
               variant="primary"
               size="small"
               @click="handleSubmit(request.id)"
+              aria-label="Отправить заявку на утверждение"
           />
 
           <BaseButton
@@ -72,6 +80,7 @@
               variant="secondary"
               size="small"
               @click="handleRowClick(request.id)"
+              aria-label="Редактировать продукты в заявке"
           />
 
       </BaseTableCell>
@@ -88,5 +97,15 @@
     border-radius: 4px;
     background-color: var(--color-bg-success-light);
     color: var(--color-text-success);
+  }
+
+  .statusActive {
+    background-color: var(--color-bg-success-light);
+    color: var(--color-text-success);
+  }
+
+  .statusReady {
+    background-color: var(--color-bg-info-light);
+    color: var(--color-text-info);
   }
 </style>
