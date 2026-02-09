@@ -8,7 +8,6 @@ export const useRequests = () => {
 
     const loadRequests = async () => {
         loading.value = true
-        error.value = null
         try {
             requests.value = await $fetch<Request[]>('/api/table-data')
             requests.value = requests.value.map(request => ({
