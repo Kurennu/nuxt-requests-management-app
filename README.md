@@ -1,9 +1,6 @@
 # Nuxt Requests Management
 
 Приложение для управления заявками и редактирования товаров
-
-Деплой: https://nuxt-requests-management-app.vercel.app/
-
 ![Скриншот](./requests-management/public/preview.jpg)
 ### Главная страница `/`
 - Таблица заявок с колонками: Номер, Статус, Результат проверки, Дата создания, Действие
